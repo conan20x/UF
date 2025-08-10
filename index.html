@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fadime ♥ Umut</title>
+  <meta name="description" content="Sadece Fadime'nin girebildiği küçük bir sürpriz."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f0f14;
+      --card: #151621;
+      --muted: #9aa0b4;
+      --accent: #ff4d6d;
+      --accent-2: #7c3aed;
+      --success: #22c55e;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background: radial-gradient(1200px 700px at 80% -10%, rgba(124,58,237,.25), transparent),
+                       radial-gradient(900px 600px at 10% 110%, rgba(255,77,109,.18), transparent),
+                       var(--bg);
+      color:#fff; font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .wrap{min-height:100%; display:grid; place-items:center; padding:24px}
+    .gate{
+      width:100%; max-width:480px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:28px; position:relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(8px);
+      transform: translateY(0);
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    h1.logo{font-family:"Great Vibes", cursive; font-size:52px; line-height:1; margin:0 0 8px}
+    .tag{color:var(--muted); font-weight:500; letter-spacing:.3px; margin-bottom:16px}
+    label{display:block; font-weight:600; margin:14px 0 8px}
+    .field{position:relative}
+    input[type="text"]{
+      width:100%; padding:16px 16px 16px 48px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
+      outline:none; background:#0e0f16; color:#fff; font-size:16px; transition: border .2s ease, box-shadow .2s ease;
+    }
+    input[type="text"]:focus{border-color:rgba(255,255,255,.28); box-shadow:0 0 0 6px rgba(124,58,237,.12)}
+    .icon{position:absolute; left:14px; top:50%; transform:translateY(-50%); opacity:.7}
+    .btn{
+      width:100%; margin-top:14px; padding:14px 16px; border-radius:14px; background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#fff; font-weight:700; font-size:16px; border:none; cursor:pointer; transition: transform .05s ease, filter .2s;
+    }
+    .btn:active{transform:scale(.99)}
+    .hint{margin-top:10px; color:var(--muted); font-size:13px}
+    .error{margin-top:10px; color:#ff6b6b; font-weight:600; min-height:22px}
+
+    /* Hidden app content */
+    .app{display:none; max-width:980px; width:100%;}
+    .hero{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08);
+      border-radius:28px; padding:28px; box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .row{display:grid; grid-template-columns: 1.15fr .85fr; gap:22px}
+    @media (max-width:900px){.row{grid-template-columns:1fr}}
+    .hero h2{font-size:36px; margin:0 0 10px}
+    .hero p{color:#ccd1e0; margin:0 0 16px}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:18px}
+    .grid{display:grid; gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.grid.cols-3{grid-template-columns:1fr}}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#0e0f16; border:1px solid rgba(255,255,255,.08); color:#d9def1; font-size:13px}
+    .kudos{color:#9affc6}
+
+    .footer{opacity:.8; font-size:12px; text-align:center; margin-top:18px}
+
+    /* little hearts */
+    .hearts {position: fixed; inset:0; pointer-events:none; overflow:hidden}
+    .heart {position:absolute; font-size:18px; animation: rise 6s linear forwards; opacity:.8}
+    @keyframes rise {from{transform:translateY(0) scale(0.8)} to{transform:translateY(-120vh) scale(1.4); opacity:0}}
+
+    /* Shake on error */
+    .shake {animation: shake .3s linear}
+    @keyframes shake {from{transform:translateX(0)} 25%{transform:translateX(-6px)} 50%{transform:translateX(6px)} 75%{transform:translateX(-3px)} to{transform:translateX(0)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- ENTRY GATE -->
+    <div id="gate" class="gate" role="dialog" aria-labelledby="qLabel" aria-modal="true">
+      <h1 class="logo">Fadime & Umut</h1>
+      <div class="tag">Sadece sana özel küçük bir sürpriz ✨</div>
+
+      <label id="qLabel" for="answer">Soru: Bana hitap ettiğin lakab?</label>
+      <div class="field">
+        <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z" fill="currentColor"/></svg>
+        <input id="answer" type="text" inputmode="text" autocomplete="off" placeholder="Cevabı yaz..." />
+      </div>
+      <button id="enterBtn" class="btn">Giriş yap</button>
+      <div id="error" class="error" aria-live="polite"></div>
+      <div class="hint">İpucu: küçük harf, bitişik yazılır. 💌</div>
+      <div class="footer">— Umut</div>
+    </div>
+
+    <!-- APP CONTENT (hidden until correct answer) -->
+    <main id="app" class="app">
+      <section class="hero">
+        <div class="row">
+          <div>
+            <div class="pill">🌙 Merhaba, Fadime</div>
+            <h2>Bugün <span class="kudos">gülümsemen</span> için küçük bir sayfa</h2>
+            <p>
+              Doğru cevabı bildiğine göre burası sadece <strong>ikimizin</strong> alanı.
+              Aşağıda sana özel bir not ve minik sürprizler var. 💖
+            </p>
+            <div class="grid cols-3">
+              <div class="card">
+                <h3 style="margin:0 0 6px">💌 Mektup</h3>
+                <p style="margin:0;color:#cfd5e9">Seninle aynı gökyüzüne bakmak bile yetiyor. — Umut</p>
+              </div>
+              <div class="card">
+                <h3 style="margin:0 0 6px">🎞️ Anılar</h3>
+                <p style="margin:0;color:#cfd5e9">Buraya birlikte çektiğimiz fotoğrafları ekleyebiliriz.</p>
+              </div>
+              <div class="card">
+                <h3 style="margin:0 0 6px">🌟 Sürpriz</h3>
+                <p style="margin:0;color:#cfd5e9">Aşağıdaki butona bas, gökyüzü kalplerle dolsun.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="display:grid;place-items:center;">
+            <div style="text-align:center">
+              <div style="font-family:'Great Vibes',cursive; font-size:68px; line-height:1;">Fadime</div>
+              <div style="font-size:14px; color:#b8bed3; margin-top:6px">ve</div>
+              <div style="font-family:'Great Vibes',cursive; font-size:68px; line-height:1;">Umut</div>
+              <button class="btn" style="margin-top:14px; width:auto" onclick="sprinkleHearts()">Kalpler uçsun 💗</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3 style="margin:0 0 8px">📅 Küçük söz</h3>
+          <p style="margin:0;color:#cfd5e9">Bugün, yarın, her gün: "Beraber daha güzeliz."</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px">🖼️ Galeri</h3>
+          <p style="margin:0;color:#cfd5e9">Bu kutuya resimleri sürükleyip bırakabilirsin (bilgisayarında dosyaları bu sayfaya bırak).</p>
+          <div id="drop" style="margin-top:10px; border:2px dashed rgba(255,255,255,.15); border-radius:16px; padding:18px; text-align:center; color:#9aa0b4">Resimleri buraya bırak</div>
+          <div id="gallery" class="grid cols-3" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <p class="footer">Bu sayfa <strong>Umut</strong> tarafından <strong>Fadime</strong> için hazırlandı. ♥</p>
+    </main>
+  </div>
+
+  <div class="hearts" id="heartsContainer" aria-hidden="true"></div>
+
+  <script>
+    // --- Simple gate logic ---
+    const ANSWER = "umutcan"; // Değiştirmek istersen burayı düzenle
+    const gate = document.getElementById('gate');
+    const app = document.getElementById('app');
+    const input = document.getElementById('answer');
+    const errorBox = document.getElementById('error');
+    const btn = document.getElementById('enterBtn');
+
+    const normalise = (s) => s.toLowerCase().replace(/\s+/g,'').replace(/[çÇ]/g,'c').replace(/[ğĞ]/g,'g').replace(/[ıI]/g,'i').replace(/[öÖ]/g,'o').replace(/[şŞ]/g,'s').replace(/[üÜ]/g,'u');
+
+    function openApp(){
+      gate.style.display='none';
+      app.style.display='block';
+      localStorage.setItem('fadime-access','ok');
+      sprinkleHearts(16);
+    }
+
+    // tekrar girişte hatırlasın
+    if(localStorage.getItem('fadime-access')==='ok'){
+      openApp();
+    }
+
+    let tries = 0;
+    function check(){
+      const val = normalise(input.value.trim());
+      if(!val){
+        errorBox.textContent = 'Cevabı yazmalısın.';
+        input.classList.add('shake'); setTimeout(()=>input.classList.remove('shake'), 300);
+        return;
+      }
+      if(val === ANSWER){
+        errorBox.textContent = '';
+        openApp();
+      } else {
+        tries++;
+        errorBox.textContent = 'Yanlış cevap 😅';
+        input.classList.add('shake'); setTimeout(()=>input.classList.remove('shake'), 300);
+        if(tries === 3){
+          errorBox.textContent = 'Minik ipucu: u… ile başlıyor ve bitişik.';
+        }
+      }
+    }
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ check(); }});
+
+    // --- Hearts animation ---
+    const hearts = ['❤','💗','💖','💘','💝','🩷'];
+    const heartsContainer = document.getElementById('heartsContainer');
+    function sprinkleHearts(count=10){
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.className = 'heart';
+        el.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        el.style.left = Math.random()*100 + 'vw';
+        el.style.bottom = '-10vh';
+        el.style.animationDuration = (4 + Math.random()*3) + 's';
+        el.style.fontSize = (16 + Math.random()*28) + 'px';
+        heartsContainer.appendChild(el);
+        setTimeout(()=> el.remove(), 6500);
+      }
+    }
+
+    // --- Drag & drop gallery (local preview, no upload) ---
+    const drop = document.getElementById('drop');
+    const gallery = document.getElementById('gallery');
+    ;['dragenter','dragover'].forEach(evt=> drop.addEventListener(evt, e=>{e.preventDefault(); drop.style.borderColor='rgba(255,255,255,.35)'}));
+    ;['dragleave','drop'].forEach(evt=> drop.addEventListener(evt, e=>{e.preventDefault(); drop.style.borderColor='rgba(255,255,255,.15)'}));
+    drop.addEventListener('drop', (e)=>{
+      const files = [...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));
+      files.forEach(f=>{
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = document.createElement('img');
+          img.src = reader.result; img.alt = f.name; img.style.width='100%'; img.style.borderRadius='16px';
+          img.style.display='block'; img.style.border='1px solid rgba(255,255,255,.08)';
+          const cell = document.createElement('div'); cell.className='card'; cell.appendChild(img);
+          gallery.prepend(cell);
+        };
+        reader.readAsDataURL(f);
+      });
+    });
+  </script>
+</body>
+</html>
